@@ -9,6 +9,10 @@ from langchain_community.tools import ArxivQueryRun
 from dotenv import load_dotenv
 from transformers.utils.dummy_pt_objects import Idefics2PreTrainedModel
 
+
+os.environ["STREAMLIT_DISABLE_FILE_WATCHER"] = "true"
+
+
 load_dotenv()
 
 gemini_api_key = os.getenv("GEMINI_API_KEY")
@@ -17,7 +21,7 @@ token = os.getenv("HUGGINGFAVE_TOKEN")
 if token:
   login(token=token)
 
-client = chromadb.PersistentClient(path="chroma_db")
+client = chromadb.Client()
 text_embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 arxiv_tool = ArxivQueryRun()
 
