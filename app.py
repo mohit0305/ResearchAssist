@@ -3,6 +3,7 @@ import PyPDF2
 import streamlit as st
 from sentence_transformers import SentenceTransformer
 import chromadb
+from chromadb.config import Settings
 from litellm import completion
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.tools import ArxivQueryRun
@@ -21,7 +22,7 @@ token = os.getenv("HUGGINGFAVE_TOKEN")
 if token:
   login(token=token)
 
-client = chromadb.Client()
+client = chromadb.Client(Settings(chroma_db_impl="duckdb")) 
 text_embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 arxiv_tool = ArxivQueryRun()
 
