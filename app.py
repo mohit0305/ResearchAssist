@@ -22,7 +22,7 @@ token = os.getenv("HUGGINGFAVE_TOKEN")
 if token:
   login(token=token)
 
-client = chromadb.Client(Settings(chroma_db_impl="duckdb")) 
+client = chromadb.HttpClient() 
 text_embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 arxiv_tool = ArxivQueryRun()
 
